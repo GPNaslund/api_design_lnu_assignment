@@ -1,0 +1,980 @@
+basePath: /api/v1
+definitions:
+  authhandler.Payload:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  authhandler.Response:
+    properties:
+      token:
+        type: string
+    type: object
+  dogdto.DogDTO:
+    properties:
+      adoption_fee:
+        type: integer
+      birth_date:
+        type: string
+      breed:
+        type: string
+      description:
+        type: string
+      friendly_with:
+        type: string
+      gender:
+        type: string
+      id:
+        type: integer
+      image_url:
+        type: string
+      is_adopted:
+        type: boolean
+      is_neutered:
+        type: boolean
+      links:
+        $ref: '#/definitions/dogdto.DogLinksDTO'
+      name:
+        type: string
+      shelter_id:
+        type: integer
+    type: object
+  dogdto.DogLinksDTO:
+    properties:
+      self_link:
+        type: string
+      shelter_link:
+        type: string
+    type: object
+  dogdto.DogsAndPaginationLinksDTO:
+    properties:
+      dogs:
+        items:
+          $ref: '#/definitions/dogdto.DogDTO'
+        type: array
+      pagination_links:
+        $ref: '#/definitions/dto.PaginationLinksDTO'
+    type: object
+  dogdto.NewDogDTO:
+    properties:
+      adoption_fee:
+        type: integer
+      birth_date:
+        type: string
+      breed:
+        type: string
+      description:
+        type: string
+      friendly_with:
+        type: string
+      gender:
+        type: string
+      image_url:
+        type: string
+      is_adopted:
+        type: boolean
+      is_neutered:
+        type: boolean
+      name:
+        type: string
+      shelter_id:
+        type: integer
+    type: object
+  dogdto.UpdateDogDTO:
+    properties:
+      adoption_fee:
+        type: integer
+      birth_date:
+        type: string
+      breed:
+        type: string
+      description:
+        type: string
+      friendly_with:
+        type: string
+      gender:
+        type: string
+      image_url:
+        type: string
+      is_adopted:
+        type: boolean
+      is_neutered:
+        type: boolean
+      name:
+        type: string
+    type: object
+  dogshelterdto.DogShelterDTO:
+    properties:
+      address:
+        type: string
+      city:
+        type: string
+      country:
+        type: string
+      id:
+        type: integer
+      links:
+        $ref: '#/definitions/dogshelterdto.DogShelterDtoLinks'
+      name:
+        type: string
+      website:
+        type: string
+    type: object
+  dogshelterdto.DogShelterDtoLinks:
+    properties:
+      dogs_link:
+        type: string
+      self_link:
+        type: string
+    type: object
+  dogshelterdto.DogSheltersAndPaginationLinksDTO:
+    properties:
+      dog_shelter_data:
+        items:
+          $ref: '#/definitions/dogshelterdto.DogShelterDTO'
+        type: array
+      pagination_links:
+        $ref: '#/definitions/dto.PaginationLinksDTO'
+    type: object
+  dogshelterdto.NewDogShelterDTO:
+    properties:
+      address:
+        type: string
+      city:
+        type: string
+      country:
+        type: string
+      name:
+        type: string
+      password:
+        type: string
+      username:
+        type: string
+      website:
+        type: string
+    type: object
+  dogshelterdto.UpdateDogShelterDTO:
+    properties:
+      address:
+        type: string
+      city:
+        type: string
+      country:
+        type: string
+      name:
+        type: string
+      website:
+        type: string
+    type: object
+  dto.EntryPointLinksDTO:
+    properties:
+      authentication_url:
+        type: string
+      dog_shelters_url:
+        type: string
+      dogs_url:
+        type: string
+      users_url:
+        type: string
+    type: object
+  dto.ErrorResponse:
+    properties:
+      error:
+        type: string
+    type: object
+  dto.PaginationLinksDTO:
+    properties:
+      first:
+        type: string
+      last:
+        type: string
+      next:
+        type: string
+      previous:
+        type: string
+      self:
+        type: string
+    type: object
+  model.WebhookAction:
+    enum:
+    - new_dog_added
+    type: string
+    x-enum-varnames:
+    - NEW_DOG_ADDED
+  userdto.NewUserDTO:
+    properties:
+      password:
+        type: string
+      username:
+        type: string
+    type: object
+  userdto.UserDTO:
+    properties:
+      id:
+        type: integer
+      username:
+        type: string
+      webhook:
+        $ref: '#/definitions/userwebhookdto.UserWebhookDTO'
+    type: object
+  userwebhookdto.NewUserWebhookDTO:
+    properties:
+      client_secret:
+        type: string
+      endpoint_url:
+        type: string
+      webhook_actions:
+        items:
+          type: string
+        type: array
+    type: object
+  userwebhookdto.UpdateUserWebhookDTO:
+    properties:
+      client_secret:
+        type: string
+      endpoint_url:
+        type: string
+      webhook_actions:
+        items:
+          type: string
+        type: array
+    type: object
+  userwebhookdto.UserWebhookDTO:
+    properties:
+      endpoint_url:
+        type: string
+      user_id:
+        type: integer
+      webhook_actions:
+        items:
+          $ref: '#/definitions/model.WebhookAction'
+        type: array
+    type: object
+externalDocs:
+  description: OpenAPI
+  url: https://swagger.io/resources/open-api/
+host: https://cscloud7-113.lnu.se/dogadoption
+info:
+  contact:
+    email: gn222gq@student.lnu.se
+    name: Gustav Näslund, gn222gq
+  description: An API with centralized dog adoption information.
+  title: DogAdoptionApp REST HATEOAS API
+  version: "1.0"
+paths:
+  /:
+    get:
+      consumes:
+      - application/json
+      description: Returns a collection of links that represent the entry point of
+        the API.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/dto.EntryPointLinksDTO'
+      summary: Get entry point links
+      tags:
+      - entrypoint
+  /auth/login:
+    post:
+      consumes:
+      - application/json
+      description: Authenticates a user by username and password, and returns a JWT
+        token if successful.
+      parameters:
+      - description: Login Credentials
+        in: body
+        name: payload
+        required: true
+        schema:
+          $ref: '#/definitions/authhandler.Payload'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Returns JWT token
+          schema:
+            $ref: '#/definitions/authhandler.Response'
+        "400":
+          description: Bad request when the JSON body cannot be parsed or wrong payload
+            type
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "401":
+          description: Unauthorized, when the username or password is incorrect
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error, something went wrong with the server
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: User login
+      tags:
+      - auth
+  /dogs:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a list of dogs based on provided query parameters like
+        breed, size, and age.
+      parameters:
+      - description: Filter by dog breed
+        in: query
+        name: breed
+        type: string
+      - description: Filter by dog gender
+        in: query
+        name: gender
+        type: string
+      - description: Filter by if dog is neutered
+        in: query
+        name: is_neutered
+        type: boolean
+      - description: Filter by if dog is adopted
+        in: query
+        name: is_adopted
+        type: boolean
+      - description: Filter dogs that are from a specific dog shelter
+        in: query
+        name: shelter_id
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success, returns a list of dogs along with pagination details
+          schema:
+            $ref: '#/definitions/dogdto.DogsAndPaginationLinksDTO'
+        "400":
+          description: Bad Request if the query parameters are invalid
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error if an error occurs while processing the
+            request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Get dogs
+      tags:
+      - dogs
+    post:
+      consumes:
+      - application/json
+      description: Adds a new dog to the system with the provided dog data in JSON
+        format. shelter_id field is for admins only.
+      parameters:
+      - description: Dog Data
+        in: body
+        name: dog
+        required: true
+        schema:
+          $ref: '#/definitions/dogdto.NewDogDTO'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Success, returns the newly created dog information
+          schema:
+            $ref: '#/definitions/dogdto.DogDTO'
+        "400":
+          description: Bad Request, if the JSON body cannot be parsed or mandatory
+            fields are missing
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "401":
+          description: Unauthorized, if the user does not have permission to add a
+            dog
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error, if an error occurs while processing
+            the request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Add a new dog
+      tags:
+      - dogs
+  /dogs/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Deletes a dog specified by its ID if the requester has the necessary
+        permissions.
+      parameters:
+      - description: Dog ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: Dog deleted successfully
+        "400":
+          description: Bad Request if the request was malformed
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "401":
+          description: Unauthorized if the user does not have permission to delete
+            the dog
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found if the dog with the specified ID does not exist
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error for any server errors
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete a dog
+      tags:
+      - dogs
+    get:
+      consumes:
+      - application/json
+      description: Retrieves detailed information about a dog specified by its ID.
+      parameters:
+      - description: Dog ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success, returns detailed information about the dog
+          schema:
+            $ref: '#/definitions/dogdto.DogDTO'
+        "404":
+          description: Not Found, if no dog matches the provided ID
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error, if an error occurs while processing
+            the request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Get a dog by ID
+      tags:
+      - dogs
+    put:
+      consumes:
+      - application/json
+      description: Updates the information for an existing dog specified by its ID
+        with the provided dog data in JSON format.
+      parameters:
+      - description: Dog ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Dog Update Data
+        in: body
+        name: dog
+        required: true
+        schema:
+          $ref: '#/definitions/dogdto.UpdateDogDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success, returns the updated dog information
+          schema:
+            $ref: '#/definitions/dogdto.DogDTO'
+        "400":
+          description: Bad Request, if the JSON body cannot be parsed, mandatory fields
+            are missing, or the dog data is incomplete
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "401":
+          description: Unauthorized, if the user does not have permission to update
+            the dog
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error, if an error occurs while processing
+            the request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Update dog information
+      tags:
+      - dogs
+  /dogshelters:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves a list of dog shelters based on provided query parameters
+        like location and capacity.
+      parameters:
+      - description: Filter by name
+        in: query
+        name: name
+        type: string
+      - description: Filter by country
+        in: query
+        name: country
+        type: string
+      - description: Filter by city
+        in: query
+        name: city
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success, returns a list of dog shelters
+          schema:
+            $ref: '#/definitions/dogshelterdto.DogSheltersAndPaginationLinksDTO'
+        "400":
+          description: Bad Request if the query parameters are invalid
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error if an error occurs while processing the
+            request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Get dog shelters
+      tags:
+      - dogshelters
+    post:
+      consumes:
+      - application/json
+      description: Adds a new dog shelter to the system with the provided shelter
+        data in JSON format.
+      parameters:
+      - description: Dog Shelter Data
+        in: body
+        name: shelter
+        required: true
+        schema:
+          $ref: '#/definitions/dogshelterdto.NewDogShelterDTO'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Success, returns the newly created dog shelter information
+          schema:
+            $ref: '#/definitions/dogshelterdto.DogShelterDTO'
+        "400":
+          description: Bad Request, if the JSON body cannot be parsed, mandatory fields
+            are missing, or the dog shelter data is incomplete
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "401":
+          description: Unauthorized, if the user does not have permission to add a
+            dog shelter
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error, if an error occurs while processing
+            the request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Add a new dog shelter
+      tags:
+      - dogshelters
+  /dogshelters/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Deletes a dog shelter specified by its ID if the requester has
+        the necessary permissions.
+      parameters:
+      - description: Shelter ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: Dog shelter deleted successfully
+        "400":
+          description: Bad Request if the request was malformed
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "401":
+          description: Unauthorized if the user does not have permission to delete
+            the dog shelter
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found if the dog shelter with the specified ID does not
+            exist
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error for any server errors
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete a dog shelter
+      tags:
+      - dogshelters
+    get:
+      consumes:
+      - application/json
+      description: Retrieves detailed information about a specific dog shelter identified
+        by its unique ID.
+      parameters:
+      - description: Shelter ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success, returns detailed information about the dog shelter
+          schema:
+            $ref: '#/definitions/dogshelterdto.DogShelterDTO'
+        "404":
+          description: Not Found, if no dog shelter matches the provided ID
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error, if an error occurs while processing
+            the request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Get a dog shelter by ID
+      tags:
+      - dogshelters
+    put:
+      consumes:
+      - application/json
+      description: Updates the information for an existing dog shelter specified by
+        its ID with the provided shelter data in JSON format.
+      parameters:
+      - description: Shelter ID
+        in: path
+        name: id
+        required: true
+        type: string
+      - description: Dog Shelter Update Data
+        in: body
+        name: shelter
+        required: true
+        schema:
+          $ref: '#/definitions/dogshelterdto.UpdateDogShelterDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success, returns the updated dog shelter information
+          schema:
+            $ref: '#/definitions/dogshelterdto.DogShelterDTO'
+        "400":
+          description: Bad Request, if the JSON body cannot be parsed, mandatory fields
+            are missing, or the dog shelter data is incomplete
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "401":
+          description: Unauthorized, if the user does not have permission to update
+            the dog shelter
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error, if an error occurs while processing
+            the request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Update a dog shelter
+      tags:
+      - dogshelters
+  /users:
+    post:
+      consumes:
+      - application/json
+      description: Adds a new user to the system with the provided user data in JSON
+        format.
+      parameters:
+      - description: New User Data
+        in: body
+        name: user
+        required: true
+        schema:
+          $ref: '#/definitions/userdto.NewUserDTO'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Success, returns the newly created user information
+          schema:
+            $ref: '#/definitions/userdto.UserDTO'
+        "400":
+          description: Bad Request, if the request body is incomplete or contains
+            invalid data
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error, if something goes wrong internally
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      summary: Create a new user
+      tags:
+      - users
+  /users/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Deletes a user identified by its unique ID, provided the requester
+        has the necessary permissions.
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: User deleted successfully
+        "400":
+          description: Bad Request, if the ID parameter format is incorrect
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "401":
+          description: Unauthorized, if the requester does not have permission to
+            delete the user
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found, if no user matches the provided ID
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error, if an error occurs while processing
+            the request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete a user
+      tags:
+      - users
+  /users/{id}/webhook:
+    delete:
+      consumes:
+      - application/json
+      description: Deletes a webhook for the authenticated user based on the provided
+        webhook ID.
+      parameters:
+      - description: Webhook ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "204":
+          description: Webhook deleted successfully
+        "400":
+          description: Bad Request - No webhook found or ID must be a number
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "401":
+          description: Unauthorized - Invalid user credentials
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found - No webhook found
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error - Something went wrong internally, try
+            again later
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Delete a webhook
+      tags:
+      - users/{id}/webhook
+    get:
+      consumes:
+      - application/json
+      description: Retrieves detailed information about a specific user webhook identified
+        by its unique ID for the authenticated user.
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success, returns detailed information about the user webhook
+          schema:
+            $ref: '#/definitions/userwebhookdto.UserWebhookDTO'
+        "401":
+          description: Unauthorized, if the user credentials are invalid or do not
+            grant access to the requested resource
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found, if no resource matches the provided ID or the webhook
+            does not belong to the user
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Get a user webhook
+      tags:
+      - users/{id}/webhook
+    post:
+      consumes:
+      - application/json
+      description: Adds a new webhook for the authenticated user based on the provided
+        webhook data in JSON format. Secret must be minimum 12 characters.
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Webhook Data
+        in: body
+        name: webhook
+        required: true
+        schema:
+          $ref: '#/definitions/userwebhookdto.NewUserWebhookDTO'
+      produces:
+      - application/json
+      responses:
+        "201":
+          description: Success, returns the newly created user webhook information
+          schema:
+            $ref: '#/definitions/userwebhookdto.UserWebhookDTO'
+        "400":
+          description: Bad Request, if the JSON body cannot be parsed, mandatory fields
+            are missing, or the webhook data is incomplete
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "401":
+          description: Unauthorized, if the user credentials do not match or are invalid
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found, if the specified user does not exist
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error, if an error occurs while processing
+            the request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Create a new user webhook
+      tags:
+      - users/{id}/webhook
+    put:
+      consumes:
+      - application/json
+      description: Updates information for a specific user webhook identified by its
+        unique ID for the authenticated user based on the provided data in JSON format.
+        Secret must be minimum 12 characters.
+      parameters:
+      - description: User ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Update Webhook Data
+        in: body
+        name: data
+        required: true
+        schema:
+          $ref: '#/definitions/userwebhookdto.UpdateUserWebhookDTO'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success, returns the updated user webhook information
+          schema:
+            $ref: '#/definitions/userwebhookdto.UserWebhookDTO'
+        "400":
+          description: Bad Request, if the request data is incomplete or has invalid
+            values
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "401":
+          description: Unauthorized, if the user credentials do not match or are invalid
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "404":
+          description: Not Found, if no matching webhook resource is found for the
+            given ID
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error, if an error occurs while processing
+            the request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Update a user webhook
+      tags:
+      - users/{id}/webhook
+  /users/me:
+    get:
+      consumes:
+      - application/json
+      description: Retrieves detailed information about the authenticated user based
+        on the provided credentials.
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Success, returns detailed information about the authenticated
+            user
+          schema:
+            $ref: '#/definitions/userdto.UserDTO'
+        "401":
+          description: Unauthorized, if the user credentials do not match or are invalid
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+        "500":
+          description: Internal Server Error, if an error occurs while processing
+            the request
+          schema:
+            $ref: '#/definitions/dto.ErrorResponse'
+      security:
+      - BearerAuth: []
+      summary: Get authenticated user information
+      tags:
+      - users
+securityDefinitions:
+  BearerAuth:
+    in: header
+    name: Authorization
+    type: apiKey
+swagger: "2.0"

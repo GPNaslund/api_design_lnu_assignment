@@ -1,0 +1,5511 @@
+{
+	"info": {
+		"_postman_id": "7fe75cf0-fe9b-4cd4-b07e-23a5a5e63e5b",
+		"name": "DogAdoptionAPI",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "33622817"
+	},
+	"item": [
+		{
+			"name": "/auth",
+			"item": [
+				{
+					"name": "/login",
+					"item": [
+						{
+							"name": "success; 200 + jwt on admin",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// Check if the response body contains a JSON object with the key \"token\"",
+											"pm.test(\"Response body has token\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property(\"token\");",
+											"    ",
+											"    // Set the token as a collection variable named 'admin-token'",
+											"    pm.collectionVariables.set(\"admin-token\", jsonData.token);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"{{admin-username}}\",\n    \"password\": \"{{admin-password}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base-url}}{{api-version}}/auth/login"
+							},
+							"response": []
+						},
+						{
+							"name": "success; 200 + jwt on dogshelter",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Check if the status code is 200",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// Check if the response body contains a JSON object with the key \"token\"",
+											"pm.test(\"Response body has token\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property(\"token\");",
+											"",
+											"    // Set the token as a collection variable named 'dogshelter-token'",
+											"    pm.collectionVariables.set(\"dogshelter1-token\", jsonData.token);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"{{dogshelter1-username}}\",\n    \"password\": \"{{dogshelter1-password}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base-url}}{{api-version}}/auth/login"
+							},
+							"response": []
+						},
+						{
+							"name": "success; 200 + jwt on user",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Check if the status code is 200",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// Check if the response body contains a JSON object with the key \"token\"",
+											"pm.test(\"Response body has token\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property(\"token\");",
+											"",
+											"        // Set the token as a collection variable named 'user-token'",
+											"    pm.collectionVariables.set(\"user1-token\", jsonData.token);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"{{user1-username}}\",\n    \"password\": \"{{user1-password}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base-url}}{{api-version}}/auth/login"
+							},
+							"response": []
+						},
+						{
+							"name": "success; 200 + jwt on user2",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Check if the status code is 200",
+											"pm.test(\"Status code is 200\", function () {",
+											"    pm.response.to.have.status(200);",
+											"});",
+											"",
+											"// Check if the response body contains a JSON object with the key \"token\"",
+											"pm.test(\"Response body has token\", function () {",
+											"    var jsonData = pm.response.json();",
+											"    pm.expect(jsonData).to.have.property(\"token\");",
+											"",
+											"        // Set the token as a collection variable named 'user-token'",
+											"    pm.collectionVariables.set(\"user2-token\", jsonData.token);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"{{user2-username}}\",\n    \"password\": \"{{user2-password}}\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base-url}}{{api-version}}/auth/login"
+							},
+							"response": []
+						},
+						{
+							"name": "failure; 401 on invalid credentials",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Check if the status code is 401",
+											"pm.test(\"Status code is 401\", function () {",
+											"    pm.response.to.have.status(401);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"username\": \"invalidcredentials\",\n    \"password\": \"invalidcredentials\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base-url}}{{api-version}}/auth/login"
+							},
+							"response": []
+						},
+						{
+							"name": "failure; 400 on invalid body",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Check if the status code is 400",
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"invalidfield\": \"invalidfield\",\n    \"notavalidfield\": \"invalidfield\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base-url}}{{api-version}}/auth/login"
+							},
+							"response": []
+						},
+						{
+							"name": "failure; 400 on no body",
+							"event": [
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Check if the status code is 400",
+											"pm.test(\"Status code is 400\", function () {",
+											"    pm.response.to.have.status(400);",
+											"});"
+										],
+										"type": "text/javascript"
+									}
+								}
+							],
+							"request": {
+								"method": "POST",
+								"header": [],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": "{{base-url}}{{api-version}}/auth/login"
+							},
+							"response": []
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "/dogs",
+			"item": [
+				{
+					"name": "Deleting a dog resource",
+					"item": [
+						{
+							"name": "Success path; admin",
+							"item": [
+								{
+									"name": "1) Create a dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"var response = pm.response.json();",
+													"pm.collectionVariables.set(\"dog-id\", response.id)",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testdog\",\n    \"description\": \"testdog\",\n    \"birth_date\": \"2022-03-04T11:45:26Z\",\n    \"breed\": \"testbreed\",\n    \"is_neutered\": false,\n    \"shelter_id\": 1,\n    \"image_url\": \"https://www.testimageurl.com\",\n    \"adoption_fee\": 1,\n    \"is_adopted\": false,\n    \"friendly_with\": \"test\",\n    \"gender\": \"male\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs"
+									},
+									"response": []
+								},
+								{
+									"name": "2) Delete the dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs/{{dog-id}}"
+									},
+									"response": []
+								}
+							],
+							"auth": {
+								"type": "bearer",
+								"bearer": {
+									"token": "{{admin-token}}"
+								}
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Success path; dogshelter",
+							"item": [
+								{
+									"name": "1) Create a dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"var response = pm.response.json();",
+													"pm.collectionVariables.set(\"dog-id\", response.id)",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testdog\",\n    \"description\": \"testdog\",\n    \"birth_date\": \"2022-03-04T11:45:26Z\",\n    \"breed\": \"testbreed\",\n    \"is_neutered\": false,\n    \"shelter_id\": 1,\n    \"image_url\": \"https://www.testimageurl.com\",\n    \"adoption_fee\": 1,\n    \"is_adopted\": false,\n    \"friendly_with\": \"test\",\n    \"gender\": \"male\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs"
+									},
+									"response": []
+								},
+								{
+									"name": "2) Delete the dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs/{{dog-id}}"
+									},
+									"response": []
+								}
+							],
+							"auth": {
+								"type": "bearer",
+								"bearer": {
+									"token": "{{dogshelter1-token}}"
+								}
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Failure paths",
+							"item": [
+								{
+									"name": "Deleting with invalid credentials",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {",
+													"    pm.response.to.have.status(401);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{user1-token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs/1"
+									},
+									"response": []
+								},
+								{
+									"name": "Deleting with no credentials",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {",
+													"    pm.response.to.have.status(401);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs/1"
+									},
+									"response": []
+								},
+								{
+									"name": "Deleting an non existing resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"    pm.response.to.have.status(404);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs/99999"
+									},
+									"response": []
+								},
+								{
+									"name": "Deleting with invalid id parameter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs/abc"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Updating a dog resource",
+					"item": [
+						{
+							"name": "Success path; admin",
+							"item": [
+								{
+									"name": "1) Create a dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"var response = pm.response.json();",
+													"pm.collectionVariables.set(\"dog-id\", response.id)",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testdog\",\n    \"description\": \"testdog\",\n    \"birth_date\": \"2022-03-04T11:45:26Z\",\n    \"breed\": \"testbreed\",\n    \"is_neutered\": false,\n    \"shelter_id\": 1,\n    \"image_url\": \"https://www.testimageurl.com\",\n    \"adoption_fee\": 1,\n    \"is_adopted\": false,\n    \"friendly_with\": \"test\",\n    \"gender\": \"male\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs"
+									},
+									"response": []
+								},
+								{
+									"name": "2) Update the dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"// Check if resource is updated",
+													"pm.test(\"Response has expected values for specific fields\", function () {",
+													"    var response = pm.response.json(); // Parse the response body to JSON",
+													"",
+													"    // Check specific fields individually",
+													"    pm.expect(response.name).to.eql(\"updatetest\");",
+													"    pm.expect(response.description).to.eql(\"updatetest\");",
+													"    pm.expect(response.birth_date).to.eql(\"2024-03-04T00:00:00Z\");",
+													"    pm.expect(response.breed).to.eql(\"updatetest\");",
+													"    pm.expect(response.is_neutered).to.be.true;",
+													"    pm.expect(response.shelter_id).to.eql(1);",
+													"    pm.expect(response.image_url).to.eql(\"https://www.testimageurl.updatetest.com\");",
+													"    pm.expect(response.adoption_fee).to.eql(2);",
+													"    pm.expect(response.is_adopted).to.be.true;",
+													"    pm.expect(response.friendly_with).to.eql(\"updatetest\");",
+													"    pm.expect(response.gender).to.eql(\"female\");",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"updatetest\",\n    \"description\": \"updatetest\",\n    \"birth_date\": \"2024-03-04T11:45:26Z\",\n    \"breed\": \"updatetest\",\n    \"is_neutered\": true,\n    \"image_url\": \"https://www.testimageurl.updatetest.com\",\n    \"adoption_fee\": 2,\n    \"is_adopted\": true,\n    \"friendly_with\": \"updatetest\",\n    \"gender\": \"female\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs/{{dog-id}}"
+									},
+									"response": []
+								},
+								{
+									"name": "3) Delete the dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs/{{dog-id}}"
+									},
+									"response": []
+								}
+							],
+							"auth": {
+								"type": "bearer",
+								"bearer": {
+									"token": "{{admin-token}}"
+								}
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Success path; dogshelter",
+							"item": [
+								{
+									"name": "1) Create a dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"var response = pm.response.json();",
+													"pm.collectionVariables.set(\"dog-id\", response.id)",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testdog\",\n    \"description\": \"testdog\",\n    \"birth_date\": \"2022-03-04T11:45:26Z\",\n    \"breed\": \"testbreed\",\n    \"is_neutered\": false,\n    \"shelter_id\": 1,\n    \"image_url\": \"https://www.testimageurl.com\",\n    \"adoption_fee\": 1,\n    \"is_adopted\": false,\n    \"friendly_with\": \"test\",\n    \"gender\": \"male\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs"
+									},
+									"response": []
+								},
+								{
+									"name": "2) Update the dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"// Check if resource is updated",
+													"pm.test(\"Response has expected values for specific fields\", function () {",
+													"    var response = pm.response.json(); // Parse the response body to JSON",
+													"",
+													"    // Check specific fields individually",
+													"    pm.expect(response.name).to.eql(\"updatetest\");",
+													"    pm.expect(response.description).to.eql(\"updatetest\");",
+													"    pm.expect(response.birth_date).to.eql(\"2024-03-04T00:00:00Z\");",
+													"    pm.expect(response.breed).to.eql(\"updatetest\");",
+													"    pm.expect(response.is_neutered).to.be.true;",
+													"    pm.expect(response.shelter_id).to.eql(1);",
+													"    pm.expect(response.image_url).to.eql(\"https://www.testimageurl.updatetest.com\");",
+													"    pm.expect(response.adoption_fee).to.eql(2);",
+													"    pm.expect(response.is_adopted).to.be.true;",
+													"    pm.expect(response.friendly_with).to.eql(\"updatetest\");",
+													"    pm.expect(response.gender).to.eql(\"female\");",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"updatetest\",\n    \"description\": \"updatetest\",\n    \"birth_date\": \"2024-03-04T11:45:26Z\",\n    \"breed\": \"updatetest\",\n    \"is_neutered\": true,\n    \"image_url\": \"https://www.testimageurl.updatetest.com\",\n    \"adoption_fee\": 2,\n    \"is_adopted\": true,\n    \"friendly_with\": \"updatetest\",\n    \"gender\": \"female\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs/{{dog-id}}"
+									},
+									"response": []
+								},
+								{
+									"name": "3) Delete the dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs/{{dog-id}}"
+									},
+									"response": []
+								}
+							],
+							"auth": {
+								"type": "bearer",
+								"bearer": {
+									"token": "{{dogshelter1-token}}"
+								}
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Failure paths",
+							"item": [
+								{
+									"name": "Updating with invalid credentials",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {",
+													"    pm.response.to.have.status(401);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{user1-token}}"
+											}
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"updatetest\",\n    \"description\": \"updatetest\",\n    \"birth_date\": \"2024-03-04T11:45:26Z\",\n    \"breed\": \"updatetest\",\n    \"is_neutered\": true,\n    \"image_url\": \"https://www.testimageurl.updatetest.com\",\n    \"adoption_fee\": 2,\n    \"is_adopted\": true,\n    \"friendly_with\": \"updatetest\",\n    \"gender\": \"female\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs/10"
+									},
+									"response": []
+								},
+								{
+									"name": "Updating with no credentials",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {",
+													"    pm.response.to.have.status(401);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"updatetest\",\n    \"description\": \"updatetest\",\n    \"birth_date\": \"2024-03-04T11:45:26Z\",\n    \"breed\": \"updatetest\",\n    \"is_neutered\": true,\n    \"image_url\": \"https://www.testimageurl.updatetest.com\",\n    \"adoption_fee\": 2,\n    \"is_adopted\": true,\n    \"friendly_with\": \"updatetest\",\n    \"gender\": \"female\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs/1"
+									},
+									"response": []
+								},
+								{
+									"name": "Updating with invalid request field values",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"\",\n    \"description\": \"\",\n    \"birth_date\": \"2024-03-04\",\n    \"breed\": \"\",\n    \"is_neutered\": \"true\",\n    \"image_url\": \"\",\n    \"adoption_fee\": -10,\n    \"is_adopted\": \"true\",\n    \"friendly_with\": \"\",\n    \"gender\": \"alien\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs/1"
+									},
+									"response": []
+								},
+								{
+									"name": "Updating with invalid request fields",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"testing\": \"\",\n    \"notvalid\": \"\",\n    \"invalid\": \"2024-03-04\",\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs/1"
+									},
+									"response": []
+								},
+								{
+									"name": "Updating with empty request body",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "PUT",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs/1"
+									},
+									"response": []
+								},
+								{
+									"name": "Updating a non existing resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"    pm.response.to.have.status(404);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"updatetest\",\n    \"description\": \"updatetest\",\n    \"birth_date\": \"2024-03-04T11:45:26Z\",\n    \"breed\": \"updatetest\",\n    \"is_neutered\": true,\n    \"image_url\": \"https://www.testimageurl.updatetest.com\",\n    \"adoption_fee\": 2,\n    \"is_adopted\": true,\n    \"friendly_with\": \"updatetest\",\n    \"gender\": \"female\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs/99999"
+									},
+									"response": []
+								},
+								{
+									"name": "Updating with invalid id parameter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"updatetest\",\n    \"description\": \"updatetest\",\n    \"birth_date\": \"2024-03-04T11:45:26Z\",\n    \"breed\": \"updatetest\",\n    \"is_neutered\": true,\n    \"image_url\": \"https://www.testimageurl.updatetest.com\",\n    \"adoption_fee\": 2,\n    \"is_adopted\": true,\n    \"friendly_with\": \"updatetest\",\n    \"gender\": \"female\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs/abc"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Creating a new dog resource",
+					"item": [
+						{
+							"name": "Success path; admin",
+							"item": [
+								{
+									"name": "1) Create a dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"var response = pm.response.json();",
+													"pm.collectionVariables.set(\"dog-id\", response.id)",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testdog\",\n    \"description\": \"testdog\",\n    \"birth_date\": \"2022-03-04T11:45:26Z\",\n    \"breed\": \"testbreed\",\n    \"is_neutered\": false,\n    \"shelter_id\": 1,\n    \"image_url\": \"https://www.testimageurl.com\",\n    \"adoption_fee\": 1,\n    \"is_adopted\": false,\n    \"friendly_with\": \"test\",\n    \"gender\": \"male\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs"
+									},
+									"response": []
+								},
+								{
+									"name": "2) Delete the dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs/{{dog-id}}"
+									},
+									"response": []
+								}
+							],
+							"auth": {
+								"type": "bearer",
+								"bearer": {
+									"token": "{{admin-token}}"
+								}
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Success path; dogshelter",
+							"item": [
+								{
+									"name": "1) Create a dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"var response = pm.response.json();",
+													"pm.collectionVariables.set(\"dog-id\", response.id)",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testdog\",\n    \"description\": \"testdog\",\n    \"birth_date\": \"2022-03-04T11:45:26Z\",\n    \"breed\": \"testbreed\",\n    \"is_neutered\": false,\n    \"shelter_id\": 1,\n    \"image_url\": \"https://www.testimageurl.com\",\n    \"adoption_fee\": 1,\n    \"is_adopted\": false,\n    \"friendly_with\": \"test\",\n    \"gender\": \"male\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs"
+									},
+									"response": []
+								},
+								{
+									"name": "2) Delete the dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs/{{dog-id}}"
+									},
+									"response": []
+								}
+							],
+							"auth": {
+								"type": "bearer",
+								"bearer": {
+									"token": "{{dogshelter1-token}}"
+								}
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Failure paths",
+							"item": [
+								{
+									"name": "Creating a resource with invalid credentials",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {",
+													"    pm.response.to.have.status(401);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{user1-token}}"
+											}
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testdog\",\n    \"description\": \"testdog\",\n    \"birth_date\": \"2022-03-04T11:45:26Z\",\n    \"breed\": \"testbreed\",\n    \"is_neutered\": false,\n    \"shelter_id\": 1,\n    \"image_url\": \"https://www.testimageurl.com\",\n    \"adoption_fee\": 1,\n    \"is_adopted\": false,\n    \"friendly_with\": \"test\",\n    \"gender\": \"male\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs"
+									},
+									"response": []
+								},
+								{
+									"name": "Creating a resource without credentials",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {",
+													"    pm.response.to.have.status(401);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testdog\",\n    \"description\": \"testdog\",\n    \"birth_date\": \"2022-03-04T11:45:26Z\",\n    \"breed\": \"testbreed\",\n    \"is_neutered\": false,\n    \"shelter_id\": 1,\n    \"image_url\": \"https://www.testimageurl.com\",\n    \"adoption_fee\": 1,\n    \"is_adopted\": false,\n    \"friendly_with\": \"test\",\n    \"gender\": \"male\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs"
+									},
+									"response": []
+								},
+								{
+									"name": "Creating a resource with invalid request fields",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"testing\": \"testdog\",\n    \"invalid\": \"testdog\",\n    \"not_valid\": \"2022-03-04T11:45:26Z\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs"
+									},
+									"response": []
+								},
+								{
+									"name": "Creating a resource with invalid request values",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"\",\n    \"description\": \"\",\n    \"birth_date\": true,\n    \"breed\": \"\",\n    \"is_neutered\": \"false\",\n    \"shelter_id\": -49,\n    \"image_url\": false,\n    \"adoption_fee\": -48,\n    \"is_adopted\": \"false\",\n    \"friendly_with\": 10,\n    \"gender\": \"alien\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Get a specific dog resource",
+					"item": [
+						{
+							"name": "Success path; admin",
+							"item": [
+								{
+									"name": "1) Create a dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"var response = pm.response.json();",
+													"pm.collectionVariables.set(\"dog-id\", response.id)",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testdog\",\n    \"description\": \"testdog\",\n    \"birth_date\": \"2022-03-04T11:45:26Z\",\n    \"breed\": \"testbreed\",\n    \"is_neutered\": false,\n    \"shelter_id\": 1,\n    \"image_url\": \"https://www.testimageurl.com\",\n    \"adoption_fee\": 1,\n    \"is_adopted\": false,\n    \"friendly_with\": \"test\",\n    \"gender\": \"male\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs"
+									},
+									"response": []
+								},
+								{
+									"name": "2) Get the created dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Correct dog resource is returned\", function() {",
+													"    var response = pm.response.json();",
+													"    var expectedId = pm.variables.get(\"dog-id\");",
+													"    ",
+													"    expectedId = parseInt(expectedId, 10);",
+													"",
+													"    pm.expect(response.id).to.eql(expectedId);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs/{{dog-id}}"
+									},
+									"response": []
+								},
+								{
+									"name": "3) Delete the dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs/{{dog-id}}"
+									},
+									"response": []
+								}
+							],
+							"auth": {
+								"type": "bearer",
+								"bearer": {
+									"token": "{{admin-token}}"
+								}
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Success path; dogshelter",
+							"item": [
+								{
+									"name": "1) Create a dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"var response = pm.response.json();",
+													"pm.collectionVariables.set(\"dog-id\", response.id)",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testdog\",\n    \"description\": \"testdog\",\n    \"birth_date\": \"2022-03-04T11:45:26Z\",\n    \"breed\": \"testbreed\",\n    \"is_neutered\": false,\n    \"shelter_id\": 1,\n    \"image_url\": \"https://www.testimageurl.com\",\n    \"adoption_fee\": 1,\n    \"is_adopted\": false,\n    \"friendly_with\": \"test\",\n    \"gender\": \"male\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogs"
+									},
+									"response": []
+								},
+								{
+									"name": "2) Get the created dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Correct dog resource is returned\", function() {",
+													"    var response = pm.response.json();",
+													"    var expectedId = pm.variables.get(\"dog-id\");",
+													"    ",
+													"    expectedId = parseInt(expectedId, 10);",
+													"",
+													"    pm.expect(response.id).to.eql(expectedId);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs/{{dog-id}}"
+									},
+									"response": []
+								},
+								{
+									"name": "3) Delete the dog resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs/{{dog-id}}"
+									},
+									"response": []
+								}
+							],
+							"auth": {
+								"type": "bearer",
+								"bearer": {
+									"token": "{{dogshelter1-token}}"
+								}
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Failure path",
+							"item": [
+								{
+									"name": "Getting a resource with invalid id parameter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs/abc"
+									},
+									"response": []
+								},
+								{
+									"name": "Getting a resource that does not exist",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"    pm.response.to.have.status(404);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs/9999"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Get dogs collection",
+					"item": [
+						{
+							"name": "Success paths",
+							"item": [
+								{
+									"name": "Get without limits and filters",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"More than one dog resource is returned\", function() {",
+													"    var response = pm.response.json(); ",
+													"    pm.expect(response.dogs.length).to.be.above(1);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogs"
+									},
+									"response": []
+								},
+								{
+									"name": "Get with pagination and limits",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Exactly 5 dog resources are returned for page 2\", function() {",
+													"    var response = pm.response.json(); ",
+													"    var dogs = response.dogs;",
+													"    ",
+													"    pm.expect(dogs.length).to.eql(5);",
+													"    ",
+													"    for (let i = 0; i < dogs.length; i++) {",
+													"        pm.expect(dogs[i].id).to.eql(i + 6);",
+													"    }",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base-url}}{{api-version}}/dogs?limit=5&page=2",
+											"host": [
+												"{{base-url}}{{api-version}}"
+											],
+											"path": [
+												"dogs"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "5"
+												},
+												{
+													"key": "page",
+													"value": "2"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get with filters",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Each dog resource is male and not adopted\", function() {",
+													"    var response = pm.response.json(); ",
+													"    var dogs = response.dogs; ",
+													"    ",
+													"    dogs.forEach(function(dog) {",
+													"        pm.expect(dog.gender).to.eql(\"male\"); ",
+													"        pm.expect(dog.is_adopted).to.be.true; ",
+													"    });",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base-url}}{{api-version}}/dogs?gender=male&is-adopted=true",
+											"host": [
+												"{{base-url}}{{api-version}}"
+											],
+											"path": [
+												"dogs"
+											],
+											"query": [
+												{
+													"key": "gender",
+													"value": "male"
+												},
+												{
+													"key": "is-adopted",
+													"value": "true"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get with pagination, limit, and filters",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"All dogs are Finnish Lapphund and no more than 2 are returned\", function() {",
+													"    var responseData = pm.response.json();",
+													"    var dogs = responseData.dogs;",
+													"    ",
+													"    pm.expect(dogs.length).to.be.at.most(2);",
+													"",
+													"    dogs.forEach(dog => {",
+													"        pm.expect(dog.breed).to.eql(\"Finnish Lapphund\");",
+													"    });",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base-url}}{{api-version}}/dogs?breed=Finnish+Lapphund&limit=2&page=1",
+											"host": [
+												"{{base-url}}{{api-version}}"
+											],
+											"path": [
+												"dogs"
+											],
+											"query": [
+												{
+													"key": "breed",
+													"value": "Finnish+Lapphund"
+												},
+												{
+													"key": "limit",
+													"value": "2"
+												},
+												{
+													"key": "page",
+													"value": "1"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Failure paths",
+							"item": [
+								{
+									"name": "Get with invalid filter params",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base-url}}{{api-version}}/dogs?furstatus=alot+of+fur",
+											"host": [
+												"{{base-url}}{{api-version}}"
+											],
+											"path": [
+												"dogs"
+											],
+											"query": [
+												{
+													"key": "furstatus",
+													"value": "alot+of+fur"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "/dogshelters",
+			"item": [
+				{
+					"name": "Creating a dogshelter",
+					"item": [
+						{
+							"name": "Success path; admin",
+							"item": [
+								{
+									"name": "1) Create dogshelter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"var response = pm.response.json();",
+													"pm.collectionVariables.set(\"dogshelter-id\", response.id)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testdogshelter\",\n    \"website\": \"https://www.website.com\",\n    \"country\": \"testcountry\",\n    \"city\": \"testcity\",\n    \"address\": \"testaddress\",\n    \"username\": \"testusername\",\n    \"password\": \"testpassword\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters"
+									},
+									"response": []
+								},
+								{
+									"name": "2) Delete dogshelter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogshelters/{{dogshelter-id}}"
+									},
+									"response": []
+								}
+							],
+							"auth": {
+								"type": "bearer",
+								"bearer": {
+									"token": "{{admin-token}}"
+								}
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Failure paths",
+							"item": [
+								{
+									"name": "Create with invalid credentials",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {",
+													"    pm.response.to.have.status(401);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{dogshelter1-token}}"
+											}
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testdogshelter\",\n    \"website\": \"https://www.website.com\",\n    \"country\": \"testcountry\",\n    \"city\": \"testcity\",\n    \"address\": \"testaddress\",\n    \"username\": \"testusername\",\n    \"password\": \"testpassword\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters"
+									},
+									"response": []
+								},
+								{
+									"name": "Create with no credentials",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {",
+													"    pm.response.to.have.status(401);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testdogshelter\",\n    \"website\": \"https://www.website.com\",\n    \"country\": \"testcountry\",\n    \"city\": \"testcity\",\n    \"address\": \"testaddress\",\n    \"username\": \"testusername\",\n    \"password\": \"testpassword\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters"
+									},
+									"response": []
+								},
+								{
+									"name": "Create with invalid request fields",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"invalidfield\": \"invalid\",\n    \"notvalid\": \"notvalid\",\n    \"false\": \"false\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters"
+									},
+									"response": []
+								},
+								{
+									"name": "Create with invalid values",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"\",\n    \"website\": \"\",\n    \"country\": \"\",\n    \"city\": \"\",\n    \"address\": \"\",\n    \"username\": \"\",\n    \"password\": \"\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters"
+									},
+									"response": []
+								},
+								{
+									"name": "Create with duplicate username",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"test\",\n    \"website\": \"https://www.testwebsite.com\",\n    \"country\": \"testcountry\",\n    \"city\": \"testcity\",\n    \"address\": \"testaddress\",\n    \"username\": \"{{dogshelter1-username}}\",\n    \"password\": \"{{dogshelter1-password}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Get a specific dogshelter",
+					"item": [
+						{
+							"name": "Success path",
+							"item": [
+								{
+									"name": "Get dogshelter by id",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogshelters/1"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Failure paths",
+							"item": [
+								{
+									"name": "Get dogshelter no resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"    pm.response.to.have.status(404);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogshelters/999"
+									},
+									"response": []
+								},
+								{
+									"name": "Get dogshelter invalid id param",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogshelters/abc"
+									},
+									"response": []
+								}
+							]
+						}
+					],
+					"auth": {
+						"type": "noauth"
+					},
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"type": "text/javascript",
+								"exec": [
+									""
+								]
+							}
+						}
+					]
+				},
+				{
+					"name": "Get the dogshelter collection",
+					"item": [
+						{
+							"name": "Success paths",
+							"item": [
+								{
+									"name": "Get all dogshelters",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogshelters"
+									},
+									"response": []
+								},
+								{
+									"name": "Get dogshelters with filter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"All returned dog shelters are located in Stockholm\", function() {",
+													"    var responseData = pm.response.json();",
+													"    var shelters = responseData.dog_shelter_data; ",
+													"    ",
+													"    shelters.forEach(function(shelter) {",
+													"        pm.expect(shelter.city).to.eql(\"Stockholm\"); ",
+													"    });",
+													"});",
+													"",
+													"pm.test(\"Response structure is correct\", function() {",
+													"    var responseData = pm.response.json();",
+													"    var shelters = responseData.dog_shelter_data;",
+													"    ",
+													"    pm.expect(shelters).to.be.an('array');",
+													"    ",
+													"    if(shelters.length > 0) {",
+													"        pm.expect(shelters[0]).to.have.all.keys('id', 'name', 'website', 'country', 'city', 'address', 'links');",
+													"        pm.expect(shelters[0].links).to.have.all.keys('self_link', 'dogs_link');",
+													"    }",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base-url}}{{api-version}}/dogshelters?city=Stockholm",
+											"host": [
+												"{{base-url}}{{api-version}}"
+											],
+											"path": [
+												"dogshelters"
+											],
+											"query": [
+												{
+													"key": "city",
+													"value": "Stockholm"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get dogshelters with limit and pagination",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Only 1 dog shelter is returned\", function() {",
+													"    var responseData = pm.response.json();",
+													"    pm.expect(responseData.dog_shelter_data.length).to.eql(1); // Verify that the length of the array is 1",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base-url}}{{api-version}}/dogshelters?limit=1&page=2",
+											"host": [
+												"{{base-url}}{{api-version}}"
+											],
+											"path": [
+												"dogshelters"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "1"
+												},
+												{
+													"key": "page",
+													"value": "2"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get dogshelters with limit + pagination + filters",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Only 1 dog shelter is returned on page 2\", function() {",
+													"    var responseData = pm.response.json();",
+													"    pm.expect(responseData.dog_shelter_data.length).to.eql(1);",
+													"});",
+													"",
+													"pm.test(\"Returned dog shelter is located in Sweden\", function() {",
+													"    var responseData = pm.response.json();",
+													"    var shelter = responseData.dog_shelter_data[0];",
+													"    ",
+													"    pm.expect(shelter.country).to.eql(\"Sweden\");",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base-url}}{{api-version}}/dogshelters?limit=1&page=2&country=Sweden",
+											"host": [
+												"{{base-url}}{{api-version}}"
+											],
+											"path": [
+												"dogshelters"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "1"
+												},
+												{
+													"key": "page",
+													"value": "2"
+												},
+												{
+													"key": "country",
+													"value": "Sweden"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Failure paths",
+							"item": [
+								{
+									"name": "Get all dogshelters invalid filter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base-url}}{{api-version}}/dogshelters?status=invalid",
+											"host": [
+												"{{base-url}}{{api-version}}"
+											],
+											"path": [
+												"dogshelters"
+											],
+											"query": [
+												{
+													"key": "status",
+													"value": "invalid"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get all dogshelters invalid limit",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base-url}}{{api-version}}/dogshelters?limit=abc",
+											"host": [
+												"{{base-url}}{{api-version}}"
+											],
+											"path": [
+												"dogshelters"
+											],
+											"query": [
+												{
+													"key": "limit",
+													"value": "abc"
+												}
+											]
+										}
+									},
+									"response": []
+								},
+								{
+									"name": "Get all dogshelters invalid page",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "GET",
+										"header": [],
+										"url": {
+											"raw": "{{base-url}}{{api-version}}/dogshelters?page=abc",
+											"host": [
+												"{{base-url}}{{api-version}}"
+											],
+											"path": [
+												"dogshelters"
+											],
+											"query": [
+												{
+													"key": "page",
+													"value": "abc"
+												}
+											]
+										}
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Updating a dogshelter",
+					"item": [
+						{
+							"name": "Success path; admin",
+							"item": [
+								{
+									"name": "1) Create dogshelter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"var response = pm.response.json();",
+													"pm.collectionVariables.set(\"dogshelter-id\", response.id)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testdogshelter\",\n    \"website\": \"https://www.website.com\",\n    \"country\": \"testcountry\",\n    \"city\": \"testcity\",\n    \"address\": \"testaddress\",\n    \"username\": \"testusername\",\n    \"password\": \"testpassword\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters"
+									},
+									"response": []
+								},
+								{
+									"name": "2) Update dogshelter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Dog shelter 'name' field is updated correctly\", function() {",
+													"    var responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData.name).to.eql(\"updatesheltertest\");",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"updatesheltertest\",\n    \"website\": \"https://www.updatesheltertest.com\",\n    \"country\": \"updatesheltertest\",\n    \"city\": \"updatesheltertest\",\n    \"address\": \"updatesheltertest\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters/{{dogshelter-id}}"
+									},
+									"response": []
+								},
+								{
+									"name": "3) Delete dogshelter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogshelters/{{dogshelter-id}}"
+									},
+									"response": []
+								}
+							],
+							"auth": {
+								"type": "bearer",
+								"bearer": {
+									"token": "{{admin-token}}"
+								}
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Success path; dogshelter",
+							"item": [
+								{
+									"name": "1) Create dogshelter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"var response = pm.response.json();",
+													"pm.collectionVariables.set(\"temp-dogshelter-id\", response.id)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testdogshelter\",\n    \"website\": \"https://www.website.com\",\n    \"country\": \"testcountry\",\n    \"city\": \"testcity\",\n    \"address\": \"testaddress\",\n    \"username\": \"{{temp-dogshelter-username}}\",\n    \"password\": \"{{temp-dogshelter-password}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters"
+									},
+									"response": []
+								},
+								{
+									"name": "2) Get api-key",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Check if the status code is 200",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"// Check if the response body contains a JSON object with the key \"token\"",
+													"pm.test(\"Response body has token\", function () {",
+													"    var jsonData = pm.response.json();",
+													"    pm.expect(jsonData).to.have.property(\"token\");",
+													"",
+													"    // Set the token as a collection variable named 'dogshelter-token'",
+													"    pm.collectionVariables.set(\"temp-dogshelter-token\", jsonData.token);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"{{temp-dogshelter-username}}\",\n    \"password\": \"{{temp-dogshelter-password}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/auth/login"
+									},
+									"response": []
+								},
+								{
+									"name": "3) Update dogshelter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"pm.test(\"Dog shelter 'name' field is updated correctly\", function() {",
+													"    var responseData = pm.response.json();",
+													"    ",
+													"    pm.expect(responseData.name).to.eql(\"updatesheltertest\");",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{temp-dogshelter-token}}"
+											}
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"updatesheltertest\",\n    \"website\": \"https://www.updatesheltertest.com\",\n    \"country\": \"updatesheltertest\",\n    \"city\": \"updatesheltertest\",\n    \"address\": \"updatesheltertest\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters/{{temp-dogshelter-id}}"
+									},
+									"response": []
+								},
+								{
+									"name": "4) Delete dogshelter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogshelters/{{temp-dogshelter-id}}"
+									},
+									"response": []
+								}
+							],
+							"auth": {
+								"type": "bearer",
+								"bearer": {
+									"token": "{{admin-token}}"
+								}
+							},
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"type": "text/javascript",
+										"exec": [
+											""
+										]
+									}
+								}
+							]
+						},
+						{
+							"name": "Failure paths",
+							"item": [
+								{
+									"name": "Update dogshelter invalid credentials",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {",
+													"    pm.response.to.have.status(401);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{dogshelter1-token}}"
+											}
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"updatesheltertest\",\n    \"website\": \"https://www.updatesheltertest.com\",\n    \"country\": \"updatesheltertest\",\n    \"city\": \"updatesheltertest\",\n    \"address\": \"updatesheltertest\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters/2"
+									},
+									"response": []
+								},
+								{
+									"name": "Update dogshelter no credentials",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {",
+													"    pm.response.to.have.status(401);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"updatesheltertest\",\n    \"website\": \"https://www.updatesheltertest.com\",\n    \"country\": \"updatesheltertest\",\n    \"city\": \"updatesheltertest\",\n    \"address\": \"updatesheltertest\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters/1"
+									},
+									"response": []
+								},
+								{
+									"name": "Update dogshelter invalid fields",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"invalid\": \"updatesheltertest\",\n    \"notvalid\": \"https://www.updatesheltertest.com\",\n    \"false\": \"updatesheltertest\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters/1"
+									},
+									"response": []
+								},
+								{
+									"name": "Update dogshelter invalid values",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"\",\n    \"website\": \"\",\n    \"country\": \"\",\n    \"city\": \"\",\n    \"address\": \"\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters/1"
+									},
+									"response": []
+								},
+								{
+									"name": "Update dogshelter non existing resource",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"    pm.response.to.have.status(404);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"updatesheltertest\",\n    \"website\": \"https://www.updatesheltertest.com\",\n    \"country\": \"updatesheltertest\",\n    \"city\": \"updatesheltertest\",\n    \"address\": \"updatesheltertest\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters/999"
+									},
+									"response": []
+								},
+								{
+									"name": "Update dogshelter invalid id param",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													"",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "PUT",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"updatesheltertest\",\n    \"website\": \"https://www.updatesheltertest.com\",\n    \"country\": \"updatesheltertest\",\n    \"city\": \"updatesheltertest\",\n    \"address\": \"updatesheltertest\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters/abc"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Delete a dogshelter",
+					"item": [
+						{
+							"name": "Successful path; dogshelter",
+							"item": [
+								{
+									"name": "1) Create a dogshelter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"var responseData = pm.response.json();",
+													"pm.test(\"ID is present in response\", function() {",
+													"    pm.expect(responseData.id).to.be.ok;",
+													"    pm.collectionVariables.set(\"temp-dogshelter-id\", responseData.id);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testdogshelter\",\n    \"website\": \"https://www.testwebsite.com\",\n    \"country\": \"testcountry\",\n    \"city\": \"testcity\",\n    \"address\": \"testaddress\",\n    \"username\": \"{{temp-dogshelter-username}}\",\n    \"password\": \"{{temp-dogshelter-password}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters"
+									},
+									"response": []
+								},
+								{
+									"name": "2) Get api key",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"var responseData = pm.response.json();",
+													"",
+													"pm.test(\"Token is present in response\", function() {",
+													"    pm.expect(responseData.token, \"Response must contain a token.\").to.be.ok;",
+													"    pm.collectionVariables.set(\"temp-dogshelter-token\", responseData.token);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"{{temp-dogshelter-username}}\",\n    \"password\": \"{{temp-dogshelter-password}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/auth/login"
+									},
+									"response": []
+								},
+								{
+									"name": "3) Delete dogshelter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{temp-dogshelter-token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogshelters/{{temp-dogshelter-id}}"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Successful path; admin",
+							"item": [
+								{
+									"name": "1) Create a dogshelter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"var responseData = pm.response.json();",
+													"pm.test(\"ID is present in response\", function() {",
+													"    pm.expect(responseData.id).to.be.ok;",
+													"    pm.collectionVariables.set(\"temp-dogshelter-id\", responseData.id);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"name\": \"testdogshelter\",\n    \"website\": \"https://www.testwebsite.com\",\n    \"country\": \"testcountry\",\n    \"city\": \"testcity\",\n    \"address\": \"testaddress\",\n    \"username\": \"{{temp-dogshelter-username}}\",\n    \"password\": \"{{temp-dogshelter-password}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/dogshelters"
+									},
+									"response": []
+								},
+								{
+									"name": "2) Delete dogshelter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogshelters/{{temp-dogshelter-id}}"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Failure paths",
+							"item": [
+								{
+									"name": "Delete dogshelter invalid credentials",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {",
+													"    pm.response.to.have.status(401);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{dogshelter1-token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogshelters/2"
+									},
+									"response": []
+								},
+								{
+									"name": "Delete dogshelter no credentials",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {",
+													"    pm.response.to.have.status(401);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogshelters/{{temp-dogshelter-id}}"
+									},
+									"response": []
+								},
+								{
+									"name": "Delete dogshelter non existing dogshelter",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"    pm.response.to.have.status(404);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogshelters/999"
+									},
+									"response": []
+								},
+								{
+									"name": "Delete dogshelter invalid id param",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/dogshelters/abc"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "/users",
+			"item": [
+				{
+					"name": "/me",
+					"item": [
+						{
+							"name": "Success path",
+							"item": [
+								{
+									"name": "Get me information",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{user1-token}}"
+											}
+										},
+										"method": "GET",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/users/me"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Failure paths",
+							"item": [
+								{
+									"name": "Get me info with invalid credentials",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {",
+													"    pm.response.to.have.status(401);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "GET",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/users/me"
+									},
+									"response": []
+								},
+								{
+									"name": "Get me info with no credentials",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {",
+													"    pm.response.to.have.status(401);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "GET",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/users/me"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "/webhook",
+					"item": [
+						{
+							"name": "Get webhook info",
+							"item": [
+								{
+									"name": "Success path; user",
+									"item": [
+										{
+											"name": "Get webhook info",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {",
+															"    pm.response.to.have.status(200);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{user1-token}}"
+													}
+												},
+												"method": "GET",
+												"header": [],
+												"url": "{{base-url}}{{api-version}}/users/1/webhook"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Success path; admin",
+									"item": [
+										{
+											"name": "Get webhook info",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {",
+															"    pm.response.to.have.status(200);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{admin-token}}"
+													}
+												},
+												"method": "GET",
+												"header": [],
+												"url": "{{base-url}}{{api-version}}/users/1/webhook"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Failure paths",
+									"item": [
+										{
+											"name": "Get webhook info invalid credentials",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 401\", function () {",
+															"    pm.response.to.have.status(401);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{dogshelter1-token}}"
+													}
+												},
+												"method": "GET",
+												"header": [],
+												"url": "{{base-url}}{{api-version}}/users/1/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "Get webhook info no credentials",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 401\", function () {",
+															"    pm.response.to.have.status(401);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "noauth"
+												},
+												"method": "GET",
+												"header": [],
+												"url": "{{base-url}}{{api-version}}/users/1/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "Get webhook info no webhook",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 404\", function () {",
+															"    pm.response.to.have.status(404);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{admin-token}}"
+													}
+												},
+												"method": "GET",
+												"header": [],
+												"url": "{{base-url}}{{api-version}}/users/99/webhook"
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Create webhook",
+							"item": [
+								{
+									"name": "Success path; user",
+									"item": [
+										{
+											"name": "1) Add webhook",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 201\", function () {",
+															"    pm.response.to.have.status(201);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{user2-token}}"
+													}
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"endpoint_url\": \"https://www.testurl.com\",\n    \"webhook_actions\": [\"new_dog_added\"],\n    \"client_secret\": \"somethingveryverysecret\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/2/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "2) Delete webhook",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 204\", function () {",
+															"    pm.response.to.have.status(204);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{user2-token}}"
+													}
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": "{{base-url}}{{api-version}}/users/2/webhook"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Success path; admin",
+									"item": [
+										{
+											"name": "1) Add webhook",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 201\", function () {",
+															"    pm.response.to.have.status(201);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{admin-token}}"
+													}
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"endpoint_url\": \"https://www.testurl.com\",\n    \"webhook_actions\": [\"new_dog_added\"],\n    \"client_secret\": \"somethingveryverysecret\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/2/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "2) Delete webhook",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 204\", function () {",
+															"    pm.response.to.have.status(204);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{admin-token}}"
+													}
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": "{{base-url}}{{api-version}}/users/2/webhook"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Failure paths",
+									"item": [
+										{
+											"name": "Create webhook invalid fields",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 400\", function () {",
+															"    pm.response.to.have.status(400);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{admin-token}}"
+													}
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"invalid\": \"https://www.testurl.com\",\n    \"invalidfields\": [\"new_dog_added\"]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/2/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "Create webhook invalid credentials",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 401\", function () {",
+															"    pm.response.to.have.status(401);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{dogshelter1-token}}"
+													}
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"invalid\": \"https://www.testurl.com\",\n    \"invalidfields\": [\"new_dog_added\"]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/1/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "Create webhook no credentials",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 401\", function () {",
+															"    pm.response.to.have.status(401);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "noauth"
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"invalid\": \"https://www.testurl.com\",\n    \"invalidfields\": [\"new_dog_added\"]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/1/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "Create webhook invalid values",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 400\", function () {",
+															"    pm.response.to.have.status(400);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{admin-token}}"
+													}
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"endpoint_url\": \"\",\n    \"webhook_actions\": [\"test\"],\n    \"client_secret\": \"short\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/2/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "Create webhook no user",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 404\", function () {",
+															"    pm.response.to.have.status(404);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{admin-token}}"
+													}
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"endpoint_url\": \"https://www.testurl.com\",\n    \"webhook_actions\": [\"new_dog_added\"],\n    \"client_secret\": \"somethingveryverysecret\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/999/webhook"
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Update webhook",
+							"item": [
+								{
+									"name": "Success path; user",
+									"item": [
+										{
+											"name": "1) Add webhook",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 201\", function () {",
+															"    pm.response.to.have.status(201);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{user2-token}}"
+													}
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"endpoint_url\": \"https://www.testurl.com\",\n    \"webhook_actions\": [\"new_dog_added\"],\n    \"client_secret\": \"somethingveryverysecret\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/2/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "2) Update webhook",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {",
+															"    pm.response.to.have.status(200);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{user2-token}}"
+													}
+												},
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"endpoint_url\": \"https://www.testingupdatefunction.com\",\n    \"webhook_actions\": [\"new_dog_added\"],\n    \"client_secret\": \"testingtoupdatethesecret\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/2/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "3) Delete webhook",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 204\", function () {",
+															"    pm.response.to.have.status(204);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{user2-token}}"
+													}
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": "{{base-url}}{{api-version}}/users/2/webhook"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Success path; admin",
+									"item": [
+										{
+											"name": "1) Add webhook",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 201\", function () {",
+															"    pm.response.to.have.status(201);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{admin-token}}"
+													}
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"endpoint_url\": \"https://www.testurl.com\",\n    \"webhook_actions\": [\"new_dog_added\"],\n    \"client_secret\": \"somethingveryverysecret\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/2/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "2) Update webhook",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 200\", function () {",
+															"    pm.response.to.have.status(200);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{admin-token}}"
+													}
+												},
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"endpoint_url\": \"https://www.testingupdatefunction.com\",\n    \"webhook_actions\": [\"new_dog_added\"],\n    \"client_secret\": \"testingtoupdatethesecret\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/2/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "3) Delete webhook",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 204\", function () {",
+															"    pm.response.to.have.status(204);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{admin-token}}"
+													}
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": "{{base-url}}{{api-version}}/users/2/webhook"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Failure paths",
+									"item": [
+										{
+											"name": "Update webhook invalid credentials",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 401\", function () {",
+															"    pm.response.to.have.status(401);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{user2-token}}"
+													}
+												},
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"endpoint_url\": \"https://www.testingupdatefunction.com\",\n    \"webhook_actions\": [\"new_dog_added\"],\n    \"client_secret\": \"testingtoupdatethesecret\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/1/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "Update webhook no credentials",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 401\", function () {",
+															"    pm.response.to.have.status(401);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "noauth"
+												},
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"endpoint_url\": \"https://www.testingupdatefunction.com\",\n    \"webhook_actions\": [\"new_dog_added\"],\n    \"client_secret\": \"testingtoupdatethesecret\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/1/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "Update webhook invalid fields",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 400\", function () {",
+															"    pm.response.to.have.status(400);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{admin-token}}"
+													}
+												},
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"invalidfield\": \"https://www.testingupdatefunction.com\",\n    \"invalid\": [\"new_dog_added\"]\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/2/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "Update webhook invalid values",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 400\", function () {",
+															"    pm.response.to.have.status(400);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{admin-token}}"
+													}
+												},
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"endpoint_url\": \"http://www.invalidurl.com\",\n    \"webhook_actions\": [\"invalid_action\"],\n    \"client_secret\": \"shortsecret\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/1/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "Update webhook no webhook",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 404\", function () {",
+															"    pm.response.to.have.status(404);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{admin-token}}"
+													}
+												},
+												"method": "PUT",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"endpoint_url\": \"https://www.testingupdatefunction.com\",\n    \"webhook_actions\": [\"new_dog_added\"],\n    \"client_secret\": \"testingtoupdatethesecret\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/99/webhook"
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						},
+						{
+							"name": "Delete webhook",
+							"item": [
+								{
+									"name": "Success path; user",
+									"item": [
+										{
+											"name": "1) Add webhook",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 201\", function () {",
+															"    pm.response.to.have.status(201);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{user2-token}}"
+													}
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"endpoint_url\": \"https://www.testurl.com\",\n    \"webhook_actions\": [\"new_dog_added\"],\n    \"client_secret\": \"somethingveryverysecret\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/2/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "2) Delete webhook",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 204\", function () {",
+															"    pm.response.to.have.status(204);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{user2-token}}"
+													}
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": "{{base-url}}{{api-version}}/users/2/webhook"
+											},
+											"response": []
+										}
+									],
+									"auth": {
+										"type": "bearer",
+										"bearer": {}
+									},
+									"event": [
+										{
+											"listen": "prerequest",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										},
+										{
+											"listen": "test",
+											"script": {
+												"type": "text/javascript",
+												"exec": [
+													""
+												]
+											}
+										}
+									]
+								},
+								{
+									"name": "Success path; admin",
+									"item": [
+										{
+											"name": "1) Add webhook",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 201\", function () {",
+															"    pm.response.to.have.status(201);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{admin-token}}"
+													}
+												},
+												"method": "POST",
+												"header": [],
+												"body": {
+													"mode": "raw",
+													"raw": "{\n    \"endpoint_url\": \"https://www.testurl.com\",\n    \"webhook_actions\": [\"new_dog_added\"],\n    \"client_secret\": \"somethingveryverysecret\"\n}",
+													"options": {
+														"raw": {
+															"language": "json"
+														}
+													}
+												},
+												"url": "{{base-url}}{{api-version}}/users/2/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "2) Delete webhook",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 204\", function () {",
+															"    pm.response.to.have.status(204);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{admin-token}}"
+													}
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": "{{base-url}}{{api-version}}/users/2/webhook"
+											},
+											"response": []
+										}
+									]
+								},
+								{
+									"name": "Failure paths",
+									"item": [
+										{
+											"name": "Delete webhook invalid credentials",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 401\", function () {",
+															"    pm.response.to.have.status(401);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{user2-token}}"
+													}
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": "{{base-url}}{{api-version}}/users/1/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "Delete webhook no credentials",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 401\", function () {",
+															"    pm.response.to.have.status(401);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "noauth"
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": "{{base-url}}{{api-version}}/users/1/webhook"
+											},
+											"response": []
+										},
+										{
+											"name": "Delete webhook no webhook",
+											"event": [
+												{
+													"listen": "test",
+													"script": {
+														"exec": [
+															"pm.test(\"Status code is 404\", function () {",
+															"    pm.response.to.have.status(404);",
+															"});"
+														],
+														"type": "text/javascript"
+													}
+												}
+											],
+											"request": {
+												"auth": {
+													"type": "bearer",
+													"bearer": {
+														"token": "{{admin-token}}"
+													}
+												},
+												"method": "DELETE",
+												"header": [],
+												"url": "{{base-url}}{{api-version}}/users/9999/webhook"
+											},
+											"response": []
+										}
+									]
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Create a user",
+					"item": [
+						{
+							"name": "Success path",
+							"item": [
+								{
+									"name": "1) Create user",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"var response = pm.response.json();",
+													"pm.collectionVariables.set(\"temp-user-id\", response.id)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"{{temp-user-username}}\",\n    \"password\": \"{{temp-user-password}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/users"
+									},
+									"response": []
+								},
+								{
+									"name": "2) Get api-key",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Check if the status code is 200",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"// Check if the response body contains a JSON object with the key \"token\"",
+													"pm.test(\"Response body has token\", function () {",
+													"    var jsonData = pm.response.json();",
+													"    pm.expect(jsonData).to.have.property(\"token\");",
+													"",
+													"    // Set the token as a collection variable named 'dogshelter-token'",
+													"    pm.collectionVariables.set(\"temp-user-token\", jsonData.token);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"{{temp-user-username}}\",\n    \"password\": \"{{temp-user-password}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/auth/login"
+									},
+									"response": []
+								},
+								{
+									"name": "3) Delete user",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{temp-user-token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/users/{{temp-user-id}}"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Failure paths",
+							"item": [
+								{
+									"name": "Create user invalid fields",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"invalid\": \"{{apitestinguserusername}}\",\n    \"invalidfield\": \"{{apitestinguserpassword}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/users"
+									},
+									"response": []
+								},
+								{
+									"name": "Create user duplicate username",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});",
+													""
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"testuser\",\n    \"password\": \"testpassword123\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/users"
+									},
+									"response": []
+								},
+								{
+									"name": "Create user invalid values",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"\",\n    \"password\": \"\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/users"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				},
+				{
+					"name": "Delete a user",
+					"item": [
+						{
+							"name": "Success path; user",
+							"item": [
+								{
+									"name": "1) Create user",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"var response = pm.response.json();",
+													"pm.collectionVariables.set(\"temp-user-id\", response.id)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"{{temp-user-username}}\",\n    \"password\": \"{{temp-user-password}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/users"
+									},
+									"response": []
+								},
+								{
+									"name": "2) Get api-key",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"// Check if the status code is 200",
+													"pm.test(\"Status code is 200\", function () {",
+													"    pm.response.to.have.status(200);",
+													"});",
+													"",
+													"// Check if the response body contains a JSON object with the key \"token\"",
+													"pm.test(\"Response body has token\", function () {",
+													"    var jsonData = pm.response.json();",
+													"    pm.expect(jsonData).to.have.property(\"token\");",
+													"",
+													"    // Set the token as a collection variable named 'dogshelter-token'",
+													"    pm.collectionVariables.set(\"temp-user-token\", jsonData.token);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"{{temp-user-username}}\",\n    \"password\": \"{{temp-user-password}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/auth/login"
+									},
+									"response": []
+								},
+								{
+									"name": "3) Delete user",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{temp-user-token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/users/{{temp-user-id}}"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Success path; admin",
+							"item": [
+								{
+									"name": "1) Create user",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 201\", function () {",
+													"    pm.response.to.have.status(201);",
+													"});",
+													"",
+													"var response = pm.response.json();",
+													"pm.collectionVariables.set(\"temp-user-id\", response.id)"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "POST",
+										"header": [],
+										"body": {
+											"mode": "raw",
+											"raw": "{\n    \"username\": \"{{temp-user-username}}\",\n    \"password\": \"{{temp-user-password}}\"\n}",
+											"options": {
+												"raw": {
+													"language": "json"
+												}
+											}
+										},
+										"url": "{{base-url}}{{api-version}}/users"
+									},
+									"response": []
+								},
+								{
+									"name": "2) Delete user",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 204\", function () {",
+													"    pm.response.to.have.status(204);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/users/{{temp-user-id}}"
+									},
+									"response": []
+								}
+							]
+						},
+						{
+							"name": "Failure paths",
+							"item": [
+								{
+									"name": "Delete user without credentials",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {",
+													"    pm.response.to.have.status(401);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "noauth"
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/users/1"
+									},
+									"response": []
+								},
+								{
+									"name": "Delete user with invalid credentials",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 401\", function () {",
+													"    pm.response.to.have.status(401);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{user2-token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/users/1"
+									},
+									"response": []
+								},
+								{
+									"name": "Delete non existing user",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 404\", function () {",
+													"    pm.response.to.have.status(404);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/users/999"
+									},
+									"response": []
+								},
+								{
+									"name": "Delete user invalid id param",
+									"event": [
+										{
+											"listen": "test",
+											"script": {
+												"exec": [
+													"pm.test(\"Status code is 400\", function () {",
+													"    pm.response.to.have.status(400);",
+													"});"
+												],
+												"type": "text/javascript"
+											}
+										}
+									],
+									"request": {
+										"auth": {
+											"type": "bearer",
+											"bearer": {
+												"token": "{{admin-token}}"
+											}
+										},
+										"method": "DELETE",
+										"header": [],
+										"url": "{{base-url}}{{api-version}}/users/abc"
+									},
+									"response": []
+								}
+							]
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "/api",
+			"item": [
+				{
+					"name": "Returns hateoas links",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"Status code is 200\", function () {",
+									"    pm.response.to.have.status(200);",
+									"});"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": "{{base-url}}{{api-version}}"
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "base-url",
+			"value": "https://cscloud7-113.lnu.se/dogadoption",
+			"type": "string"
+		},
+		{
+			"key": "api-version",
+			"value": "/api/v1",
+			"type": "string"
+		},
+		{
+			"key": "admin-username",
+			"value": "testadmin",
+			"type": "string"
+		},
+		{
+			"key": "admin-password",
+			"value": "newtestadmin",
+			"type": "string"
+		},
+		{
+			"key": "dogshelter1-username",
+			"value": "testdogshelter",
+			"type": "string"
+		},
+		{
+			"key": "dogshelter1-password",
+			"value": "newtestdogshelter",
+			"type": "string"
+		},
+		{
+			"key": "dogshelter2-username",
+			"value": "wowdogshelter",
+			"type": "string"
+		},
+		{
+			"key": "dogshelter2-password",
+			"value": "newwowdogshelter",
+			"type": "string"
+		},
+		{
+			"key": "user1-username",
+			"value": "testuser",
+			"type": "string"
+		},
+		{
+			"key": "user1-password",
+			"value": "newtestuser",
+			"type": "string"
+		},
+		{
+			"key": "user2-username",
+			"value": "testuser2",
+			"type": "string"
+		},
+		{
+			"key": "user2-password",
+			"value": "newtestuser2",
+			"type": "string"
+		},
+		{
+			"key": "admin-token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "dogshelter1-token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "doghselter2-token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user1-token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "user2-token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "temp-dog-id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "temp-dogshelter-id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "temp-dogshelter-username",
+			"value": "tempdogshelter",
+			"type": "string"
+		},
+		{
+			"key": "temp-dogshelter-password",
+			"value": "tempdogshelter",
+			"type": "string"
+		},
+		{
+			"key": "temp-dogshelter-token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "temp-user-username",
+			"value": "tempuserusername",
+			"type": "string"
+		},
+		{
+			"key": "temp-user-password",
+			"value": "tempuserpassword",
+			"type": "string"
+		},
+		{
+			"key": "temp-user-id",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "temp-user-token",
+			"value": "",
+			"type": "string"
+		},
+		{
+			"key": "apitestingusertoken",
+			"value": ""
+		},
+		{
+			"key": "dog-id",
+			"value": ""
+		},
+		{
+			"key": "dogshelter-id",
+			"value": ""
+		}
+	]
+}
